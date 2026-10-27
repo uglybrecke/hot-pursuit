@@ -28,7 +28,7 @@ static constexpr int PLAYER_INITIAL_Y = 22;
 static constexpr int ENEMY_INITIAL_X = -50;
 static constexpr int ENEMY_INITIAL_Y = 40;
 static constexpr bn::fixed BASE_PLAYER_SPEED = 1.5;
-static constexpr bn::fixed BASE_ENEMY_SPEED = 1;
+static constexpr bn::fixed BASE_ENEMY_SPEED = 0.9;
 
 // Number of characters required to show two of the longest numer possible in an int (-2147483647)
 static constexpr int MAX_SCORE_CHARS = 22;
