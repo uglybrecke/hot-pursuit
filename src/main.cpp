@@ -169,8 +169,7 @@ class Enemy {
         bn::rect bounding_box; // The rectangle around the sprite for checking collision
 
         //Constructor with initialization logic
-        Enemy(int starting_x, int starting_y, bn::size starting_size, bn::fixed starting_speed) : sprite(bn::sprite_items::square.create_sprite(0, 0))  {
-            sprite = bn::sprite_items::square.create_sprite(starting_x, starting_y);
+        Enemy(int starting_x, int starting_y, bn::size starting_size, bn::fixed starting_speed) : sprite(bn::sprite_items::square.create_sprite(starting_x, starting_y))  {
             size = starting_size;
             speed = starting_speed;
             bounding_box = create_bounding_box(sprite, size);
