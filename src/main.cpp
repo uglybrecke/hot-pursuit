@@ -157,10 +157,6 @@ class Enemy {
             bounding_box = create_bounding_box(sprite, size);
         }
 
-        /**
-         * Update the position and bounding box of the player based on d-pad movement.
-         */
-        /*
         void update (Player& player) {
             bn::fixed player_x = player.sprite.x();
             bn::fixed player_y = player.sprite.y();
@@ -169,9 +165,16 @@ class Enemy {
             if (player_x < current_x) {
                 sprite.set_x(current_x - speed);
             }
-            if (player_x < )
+            if (player_x > current_x) {
+                sprite.set_x(current_x + speed);
+            }
+            if (player_y < current_y) {
+                sprite.set_y(current_y - speed);
+            }
+            if (player_y > current_y) {
+                sprite.set_y(current_y + speed);
+            }
         }
-        */
 };
 
 int main() {
@@ -184,13 +187,14 @@ int main() {
     // TODO: we will move the initialization logic to a constructor.
     Player player = Player();
 
-    Enemy enemy = Enemy(STARTING_X, STARTING_Y, ENEMY_SIZE, BASE_SPEED);
+    Enemy enemy = Enemy(STARTING_X, STARTING_Y, ENEMY_SIZE, 1);
 
     //bn::sprite_ptr enemy_sprite = bn::sprite_items::square.create_sprite(-30, 22);
     //bn::rect enemy_bounding_box = create_bounding_box(enemy_sprite, ENEMY_SIZE);
 
     while(true) {
         player.update();
+        enemy.update(player);
 
         // Reset the current score and player position if the player collides with enemy
         if(enemy.bounding_box.intersects(player.bounding_box)) {
