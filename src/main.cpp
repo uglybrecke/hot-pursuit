@@ -45,7 +45,7 @@ bn::rect create_bounding_box(bn::sprite_ptr sprite, bn::size box_size) {
                     sprite.y().round_integer(),
                     box_size.width(),
                     box_size.height());
-}
+};
 
 /**
  * Displays a score and high score.
