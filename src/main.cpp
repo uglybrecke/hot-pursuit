@@ -20,9 +20,13 @@ static constexpr int MAX_Y = bn::display::height() / 2;
 static constexpr int MIN_X = -bn::display::width() / 2;
 static constexpr int MAX_X = bn::display::width() / 2;
 
+// Player / enemy constants
 static constexpr int PLAYER_INITIAL_X = 44;
 static constexpr int PLAYER_INITIAL_Y = 22;
-static constexpr bn::fixed BASE_SPEED = 1.5;
+static constexpr int ENEMY_INITIAL_X = -50;
+static constexpr int ENEMY_INITIAL_Y = 40;
+static constexpr bn::fixed BASE_PLAYER_SPEED = 1.5;
+static constexpr bn::fixed BASE_ENEMY_SPEED = 1;
 
 // Number of characters required to show two of the longest numer possible in an int (-2147483647)
 static constexpr int MAX_SCORE_CHARS = 22;
@@ -34,10 +38,6 @@ static constexpr int SCORE_Y = -70;
 // High score location
 static constexpr int HIGH_SCORE_X = -70;
 static constexpr int HIGH_SCORE_Y = -70;
-
-//enemy constants
-static constexpr int STARTING_X = -50;
-static constexpr int STARTING_Y = 40;
 
 /**
  * Creates a rectangle centered at a sprite's location with a given size.
@@ -115,7 +115,7 @@ class Player {
         bn::rect bounding_box; // The rectangle around the sprite for checking collision
 
         //Constructor with initialization logic
-        Player() : sprite(bn::sprite_items::dot.create_sprite(PLAYER_INITIAL_X, PLAYER_INITIAL_Y)), size(PLAYER_SIZE), speed(BASE_SPEED) {
+        Player() : sprite(bn::sprite_items::dot.create_sprite(PLAYER_INITIAL_X, PLAYER_INITIAL_Y)), size(PLAYER_SIZE), speed(BASE_PLAYER_SPEED) {
             bounding_box = create_bounding_box(sprite, size);
         }
 
@@ -188,7 +188,7 @@ int main() {
     // TODO: we will move the initialization logic to a constructor.
     Player player = Player();
 
-    Enemy enemy = Enemy(STARTING_X, STARTING_Y, ENEMY_SIZE, 1);
+    Enemy enemy = Enemy(ENEMY_INITIAL_X, ENEMY_INITIAL_Y, ENEMY_SIZE, BASE_ENEMY_SPEED);
 
     //bn::sprite_ptr enemy_sprite = bn::sprite_items::square.create_sprite(-30, 22);
     //bn::rect enemy_bounding_box = create_bounding_box(enemy_sprite, ENEMY_SIZE);
