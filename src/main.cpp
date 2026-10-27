@@ -143,6 +143,20 @@ class Player {
             }
 
             bounding_box = create_bounding_box(sprite, size);
+
+            //make sure player doesn't go off the map
+            if(sprite.x() >= MAX_X) {
+                sprite.set_x(MAX_X);
+            }
+            if(sprite.x() <= MIN_X) {
+                sprite.set_x(MIN_X);
+            }
+            if(sprite.y() >= MAX_Y) {
+                sprite.set_y(MAX_Y);
+            }
+            if(sprite.y() <= MIN_Y) {
+                sprite.set_y(MIN_Y);
+            }
         }
 };
 
