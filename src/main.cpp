@@ -11,6 +11,8 @@
 #include "bn_sprite_items_dot.h"
 #include "bn_sprite_items_square.h"
 
+#include "bn_random.h"
+
 // Width and height of the the player bounding box
 static constexpr bn::size PLAYER_SIZE = {8, 8};
 static constexpr bn::size ENEMY_SIZE = {8, 8};
@@ -38,6 +40,9 @@ static constexpr int SCORE_Y = -70;
 // High score location
 static constexpr int HIGH_SCORE_X = -70;
 static constexpr int HIGH_SCORE_Y = -70;
+
+//random
+static bn::random random;
 
 /**
  * Creates a rectangle centered at a sprite's location with a given size.
@@ -181,6 +186,10 @@ class Enemy {
 int main() {
     bn::core::init();
 
+    //declare random unbiased 
+    int x_random = random.get_unbiased_int(MIN_X,MAX_X);
+    int y_random = random.get_unbiased_int(MIN_Y,MAX_Y);
+
     // Create a new score display
     ScoreDisplay scoreDisplay = ScoreDisplay();
 
@@ -200,8 +209,10 @@ int main() {
         // Reset the current score and player position if the player collides with enemy
         if(enemy.bounding_box.intersects(player.bounding_box)) {
             scoreDisplay.resetScore();
-            player.sprite.set_x(44);
-            player.sprite.set_y(22);
+            player.sprite.set_x(PLAYER_INITIAL_X);
+            player.sprite.set_y(PLAYER_INITIAL_Y);
+            enemy.sprite.set_x(x_random);
+            enemy.sprite.set_y(y_random);
         }
 
         // Update the scores and disaply them
