@@ -28,10 +28,11 @@ static constexpr int PLAYER_INITIAL_Y = 22;
 static constexpr int ENEMY_INITIAL_X = -50;
 static constexpr int ENEMY_INITIAL_Y = 40;
 static constexpr bn::fixed BASE_PLAYER_SPEED = 1.5;
-static constexpr bn::fixed BASE_ENEMY_SPEED = 0.9;
+static constexpr bn::fixed BASE_ENEMY_SPEED = 0.7;
 
 // Number of characters required to show two of the longest numer possible in an int (-2147483647)
 static constexpr int MAX_SCORE_CHARS = 22;
+static constexpr int MAX_ENEMIES = 15;
 
 // Score location
 static constexpr int SCORE_X = 70;
@@ -199,25 +200,33 @@ class Enemy {
 int main() {
     bn::core::init();
 
+    bn::vector<Enemy, MAX_ENEMIES> enemies = bn::vector<Enemy, MAX_ENEMIES>();
+
     // Create a new score display
     ScoreDisplay scoreDisplay = ScoreDisplay();
 
-    // Create a player and initialize it
+    // Create a player
     Player player = Player();
-    Enemy enemy = Enemy(ENEMY_INITIAL_X, ENEMY_INITIAL_Y, ENEMY_SIZE, BASE_ENEMY_SPEED);
+
+    // Create enemies
+    for (int i = 0; i < 4; i++){
+        Enemy new_enemy = Enemy(random.get_unbiased_int(MIN_X, MAX_X), random.get_unbiased_int(MIN_Y, MAX_Y), ENEMY_SIZE, BASE_ENEMY_SPEED);
+        enemies.push_back(new_enemy);
+    }
 
     while(true) {
-
         player.update();
-        enemy.update(player);
 
-        // Reset the current score and player position if the player collides with enemy
-        if(enemy.bounding_box.intersects(player.bounding_box)) {
-            scoreDisplay.resetScore();
-            player.sprite.set_x(PLAYER_INITIAL_X);
-            player.sprite.set_y(PLAYER_INITIAL_Y);
-            enemy.sprite.set_x(random.get_unbiased_int(MIN_X,MAX_X));
-            enemy.sprite.set_y(random.get_unbiased_int(MIN_Y,MAX_Y));
+        for (Enemy enemy : enemies) {
+            enemy.update(player);
+            // Reset the current score and player position if the player collides with enemy
+            if(enemy.bounding_box.intersects(player.bounding_box)) {
+                scoreDisplay.resetScore();
+                player.sprite.set_x(PLAYER_INITIAL_X);
+                player.sprite.set_y(PLAYER_INITIAL_Y);
+                enemy.sprite.set_x(random.get_unbiased_int(MIN_X,MAX_X));
+                enemy.sprite.set_y(random.get_unbiased_int(MIN_Y,MAX_Y));
+            }
         }
 
         // Update the scores and display them
