@@ -175,7 +175,7 @@ class Enemy {
             bounding_box = create_bounding_box(sprite, size);
         }
 
-        void update (Player& player) {
+        void update(Player& player) {
             bn::fixed player_x = player.sprite.x();
             bn::fixed player_y = player.sprite.y();
             bn::fixed current_x = sprite.x();
@@ -199,25 +199,14 @@ class Enemy {
 int main() {
     bn::core::init();
 
-
-
     // Create a new score display
     ScoreDisplay scoreDisplay = ScoreDisplay();
 
     // Create a player and initialize it
-    // TODO: we will move the initialization logic to a constructor.
     Player player = Player();
-
     Enemy enemy = Enemy(ENEMY_INITIAL_X, ENEMY_INITIAL_Y, ENEMY_SIZE, BASE_ENEMY_SPEED);
 
-    //bn::sprite_ptr enemy_sprite = bn::sprite_items::square.create_sprite(-30, 22);
-    //bn::rect enemy_bounding_box = create_bounding_box(enemy_sprite, ENEMY_SIZE);
-
     while(true) {
-
-        // //declare random unbiased 
-        // int x_random = random.get_unbiased_int(MIN_X,MAX_X);
-        // int y_random = random.get_unbiased_int(MIN_Y,MAX_Y);
 
         player.update();
         enemy.update(player);
@@ -231,9 +220,8 @@ int main() {
             enemy.sprite.set_y(random.get_unbiased_int(MIN_Y,MAX_Y));
         }
 
-        // Update the scores and disaply them
+        // Update the scores and display them
         scoreDisplay.update();
-        
 
         bn::core::update();
     }
