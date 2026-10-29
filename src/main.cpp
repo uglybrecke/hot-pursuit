@@ -221,6 +221,9 @@ int main() {
                 scoreDisplay.resetScore();
                 player.sprite.set_x(PLAYER_INITIAL_X);
                 player.sprite.set_y(PLAYER_INITIAL_Y);
+                // Remove all enemies except this one from the vector
+                enemies.clear();
+                enemies.push_back(enemy);
                 enemy.sprite.set_x(random.get_unbiased_int(MIN_X,MAX_X));
                 enemy.sprite.set_y(random.get_unbiased_int(MIN_Y,MAX_Y));
             }
