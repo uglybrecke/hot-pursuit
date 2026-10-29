@@ -15,7 +15,7 @@
 
 // Width and height of the the player bounding box
 static constexpr bn::size PLAYER_SIZE = {8, 8};
-static constexpr bn::size ENEMY_SIZE = {8, 8};
+static constexpr bn::size ENEMY_SIZE = {16, 16};
 
 static constexpr int MIN_Y = -bn::display::height() / 2;
 static constexpr int MAX_Y = bn::display::height() / 2;
