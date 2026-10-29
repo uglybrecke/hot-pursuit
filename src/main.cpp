@@ -206,10 +206,8 @@ int main() {
     // Create a new score display
     ScoreDisplay scoreDisplay = ScoreDisplay();
 
-    // Create a player and initial enemy
+    // Create a player
     Player player = Player();
-    Enemy initial_enemy = Enemy(random.get_unbiased_int(MIN_X, MAX_X), random.get_unbiased_int(MIN_Y, MAX_Y), ENEMY_SIZE, BASE_ENEMY_SPEED);
-    enemies.push_back(initial_enemy);
 
     while(true) {
         player.update();
@@ -221,11 +219,10 @@ int main() {
                 scoreDisplay.resetScore();
                 player.sprite.set_x(PLAYER_INITIAL_X);
                 player.sprite.set_y(PLAYER_INITIAL_Y);
-                // Remove all enemies except this one from the vector
+                // Remove all enemies
                 enemies.clear();
-                enemies.push_back(enemy);
-                enemy.sprite.set_x(random.get_unbiased_int(MIN_X,MAX_X));
-                enemy.sprite.set_y(random.get_unbiased_int(MIN_Y,MAX_Y));
+                frame_count = 0;
+                break;
             }
         }
 
