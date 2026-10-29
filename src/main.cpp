@@ -44,6 +44,7 @@ static constexpr int HIGH_SCORE_Y = -70;
 
 //random
 static bn::random random;
+static bn::fixed frame_count = 0;
 
 /**
  * Creates a rectangle centered at a sprite's location with a given size.
@@ -205,14 +206,10 @@ int main() {
     // Create a new score display
     ScoreDisplay scoreDisplay = ScoreDisplay();
 
-    // Create a player
+    // Create a player and initial enemy
     Player player = Player();
-
-    // Create enemies
-    for (int i = 0; i < 4; i++){
-        Enemy new_enemy = Enemy(random.get_unbiased_int(MIN_X, MAX_X), random.get_unbiased_int(MIN_Y, MAX_Y), ENEMY_SIZE, BASE_ENEMY_SPEED);
-        enemies.push_back(new_enemy);
-    }
+    Enemy initial_enemy = Enemy(random.get_unbiased_int(MIN_X, MAX_X), random.get_unbiased_int(MIN_Y, MAX_Y), ENEMY_SIZE, BASE_ENEMY_SPEED);
+    enemies.push_back(initial_enemy);
 
     while(true) {
         player.update();
@@ -229,8 +226,22 @@ int main() {
             }
         }
 
+        // Spawn an enemy every 10 seconds if there's room
+        if ((frame_count % 600) == 0) {
+            if (enemies.size() < MAX_ENEMIES) {
+                Enemy new_enemy = Enemy(random.get_unbiased_int(MIN_X, MAX_X), random.get_unbiased_int(MIN_Y, MAX_Y), ENEMY_SIZE, BASE_ENEMY_SPEED);
+                enemies.push_back(new_enemy);
+            }
+        }
+        // Reset the frame counter after 4 minutes
+        if (frame_count == 14400) {
+            frame_count = 0;
+        }
+
         // Update the scores and display them
         scoreDisplay.update();
+
+        frame_count += 1;
 
         bn::core::update();
     }
