@@ -3,9 +3,6 @@
 #include <bn_keypad.h>
 #include <bn_rect.h>
 #include <bn_size.h>
-#include <bn_string.h>
-#include <bn_sprite_ptr.h>
-#include <bn_sprite_text_generator.h>
 
 #include "bn_sprite_items_dot.h"
 #include "bn_sprite_items_square.h"
