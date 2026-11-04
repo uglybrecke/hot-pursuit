@@ -7,6 +7,7 @@
 #include "Fire.h"
 #include "Cecil.h"
 #include "common.h"
+#include "EnemyManager.h"
 
 //random
 static bn::random random;
@@ -17,19 +18,23 @@ int main() {
 
     bn::vector<Enemy, constants::MAX_ENEMIES> enemies = bn::vector<Enemy, constants::MAX_ENEMIES>();
 
-    // Create a new score display
+    // Create a new Score Display
     ScoreDisplay scoreDisplay = ScoreDisplay();
 
-    // Create a player
+    // Create a Player
     Player player = Player();
 
-    //create fire
+    //create Fire
     Fire fire(0,0);
 
     //create Cecil
     Cecil cecil(-64, 0);
 
+    //create an enemyManager
+    EnemyManager enemyManager;
+
     while(true) {
+
         //get the last safe player spot before moving
         bn::fixed p_x = player.sprite.x();
         bn::fixed p_y = player.sprite.y();        
@@ -41,8 +46,18 @@ int main() {
         //make player not walk into fire
         block_player(player, fire.bounding_box, p_x, p_y);
 
+        //make player not walk into cecil
+        block_player(player, cecil.bounding_box, p_x, p_y);
+
         for (Enemy enemy : enemies) {
             enemy.update(player);
+            //detect if an enemy bumps into Cecil
+            if(enemy.bounding_box.intersects(cecil.bounding_box)) {
+                //remove skull
+                //switch cecil to run
+                //break out of the enemy loop
+            }
+
             // Reset the current score and player position if the player collides with enemy
             if(enemy.bounding_box.intersects(player.bounding_box)) {
                 scoreDisplay.resetScore();
@@ -56,12 +71,8 @@ int main() {
         }
 
         // Spawn an enemy every 10 seconds if there's room
-        if ((frame_count % 600) == 0) {
-            if (enemies.size() < constants::MAX_ENEMIES) {
-                Enemy new_enemy = Enemy(random.get_unbiased_int(constants::MIN_X, constants::MAX_X), random.get_unbiased_int(constants::MIN_Y, constants::MAX_Y), constants::enemy::SIZE, constants::enemy::BASE_SPEED);
-                enemies.push_back(new_enemy);
-            }
-        }
+        enemyManager.spawn(enemies, frame_count);
+
         // Reset the frame counter after 4 minutes
         if (frame_count == 14400) {
             frame_count = 0;

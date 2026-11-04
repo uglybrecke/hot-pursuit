@@ -4,8 +4,6 @@
 #include <bn_rect.h>
 #include "Player.h"
 
-class Player;
-
 /**
  * Creates a rectangle centered at a sprite's location with a given size.
  * sprite the sprite to center the box around
