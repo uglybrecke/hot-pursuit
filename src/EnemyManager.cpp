@@ -3,8 +3,9 @@
 /**
  * A class to manage all of the skulls 
  */
-void EnemyManager::spawn(bn::vector<Enemy,
-                         constants::MAX_ENEMIES>& enemies,
+
+//the spawning function
+void EnemyManager::spawn(bn::vector<Enemy, constants::MAX_ENEMIES>& enemies,
                          bn::fixed frame_count)
 {
         // Spawn an enemy every 10 seconds if there's room
@@ -23,4 +24,18 @@ void EnemyManager::spawn(bn::vector<Enemy,
                 enemies.push_back(new_enemy);
             }
         }
+}
+
+//return true or false to main to reset the game
+bool EnemyManager::update(bn::vector<Enemy, constants::MAX_ENEMIES>& enemies,
+                          Player& player)
+{
+    for(Enemy& enemy : enemies) {
+        enemy.update(player);
+
+        if(enemy.bounding_box.intersects(player.bounding_box)) {
+            return true;
+        }
+    }
+    return false;
 }

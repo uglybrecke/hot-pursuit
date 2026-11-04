@@ -8,6 +8,7 @@
 #include "Cecil.h"
 #include "common.h"
 #include "EnemyManager.h"
+#include "Game.h"
 
 //random
 static bn::random random;
@@ -49,25 +50,11 @@ int main() {
         //make player not walk into cecil
         block_player(player, cecil.bounding_box, p_x, p_y);
 
-        for (Enemy enemy : enemies) {
-            enemy.update(player);
-            //detect if an enemy bumps into Cecil
-            if(enemy.bounding_box.intersects(cecil.bounding_box)) {
-                //remove skull
-                //switch cecil to run
-                //break out of the enemy loop
-            }
-
-            // Reset the current score and player position if the player collides with enemy
-            if(enemy.bounding_box.intersects(player.bounding_box)) {
-                scoreDisplay.resetScore();
-                player.sprite.set_x(constants::player::INITIAL_X);
-                player.sprite.set_y(constants::player::INITIAL_Y);
-                // Remove all enemies
-                enemies.clear();
-                frame_count = 0;
-                break;
-            }
+        //reset game
+        if(enemyManager.update(enemies, player)) {
+            reset_game(player, scoreDisplay);
+            enemies.clear();
+            frame_count = 0;
         }
 
         // Spawn an enemy every 10 seconds if there's room

@@ -10,8 +10,12 @@
  */
 class EnemyManager {
     public:
+        //function to spawn enemies
         void spawn(bn::vector<Enemy, constants::MAX_ENEMIES>& enemies,
-                        bn::fixed frame_count);
+                    bn::fixed frame_count);
+        //function to update if the player was hit
+        bool update(bn::vector<Enemy, constants::MAX_ENEMIES>& enemies,
+                    Player& player);
 
     private:
         bn::random random;
