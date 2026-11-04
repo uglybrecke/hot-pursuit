@@ -13,7 +13,7 @@
         bn::rect bounding_box;      
 
         /**
-         * 
+         * Fire constructor
         */
         Fire(int x, int y);
 

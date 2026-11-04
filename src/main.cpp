@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "ScoreDisplay.h"
 #include "Fire.h"
+#include "Cecil.h"
 
 //random
 static bn::random random;
@@ -24,6 +25,9 @@ int main() {
     //create fire
     Fire fire(0,0);
 
+    //create Cecil
+    Cecil cecil(-64, 0);
+
     while(true) {
         //get the last safe player spot before moving
         bn::fixed p_x = player.sprite.x();
@@ -31,6 +35,13 @@ int main() {
 
         player.update();
         fire.update();
+        cecil.update();
+
+        //make player not walk into fire
+        if(fire.bounding_box.intersects(player.bounding_box)) {
+            player.sprite.set_x(p_x);
+            player.sprite.set_y(p_y);
+        }
 
         for (Enemy enemy : enemies) {
             enemy.update(player);
@@ -44,17 +55,6 @@ int main() {
                 frame_count = 0;
                 break;
             }
-        }
-        
-        //set location variable(s)
-        //detect movement (player.update())
-        //check if current data is within bounding box if so set player to location variable
-
-
-        //make player not walk into fire
-        if(fire.bounding_box.intersects(player.bounding_box)) {
-            player.sprite.set_x(p_x);
-            player.sprite.set_y(p_y);
         }
 
         // Spawn an enemy every 10 seconds if there's room

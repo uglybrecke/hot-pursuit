@@ -11,7 +11,7 @@ Fire::Fire(int x, int y) :
 
 //flip the sprite 
 void Fire::update() {
-    flicker++; //showing up as red, but code runs??
+    flicker++;
 
     if(flicker >= 30) {
         sprite.set_horizontal_flip(!sprite.horizontal_flip());
