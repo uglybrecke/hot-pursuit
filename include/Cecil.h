@@ -16,6 +16,7 @@ class Cecil {
         Cecil(int x, int y);
 
         void update();
+        bool detect_enemy();
 
     private:
         bn::sprite_ptr sprite;

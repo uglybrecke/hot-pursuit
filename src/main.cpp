@@ -6,6 +6,7 @@
 #include "ScoreDisplay.h"
 #include "Fire.h"
 #include "Cecil.h"
+#include "common.h"
 
 //random
 static bn::random random;
@@ -38,10 +39,7 @@ int main() {
         cecil.update();
 
         //make player not walk into fire
-        if(fire.bounding_box.intersects(player.bounding_box)) {
-            player.sprite.set_x(p_x);
-            player.sprite.set_y(p_y);
-        }
+        block_player(player, fire.bounding_box, p_x, p_y);
 
         for (Enemy enemy : enemies) {
             enemy.update(player);
