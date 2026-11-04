@@ -1,10 +1,5 @@
 #include <bn_core.h>
-#include <bn_display.h>
-#include <bn_keypad.h>
-#include <bn_rect.h>
-#include <bn_size.h>
 
-#include "bn_sprite_items_dot.h"
 #include "bn_sprite_items_square.h"
 
 #include "bn_random.h"
