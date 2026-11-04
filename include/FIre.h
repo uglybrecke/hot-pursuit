@@ -22,4 +22,10 @@
         bool fireBox();
 
         void collision();
+
+    private:
+        bn::sprite_ptr sprite;
+        
+        //each fire has a flicker timer in it
+        int flicker = 0;
  };

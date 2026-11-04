@@ -4,6 +4,7 @@
 #include "Enemy.h"
 #include "Player.h"
 #include "ScoreDisplay.h"
+#include "Fire.h"
 
 //random
 static bn::random random;
@@ -20,8 +21,12 @@ int main() {
     // Create a player
     Player player = Player();
 
+    //create fire
+    Fire fire(0,0);
+
     while(true) {
         player.update();
+        fire.update();
 
         for (Enemy enemy : enemies) {
             enemy.update(player);
