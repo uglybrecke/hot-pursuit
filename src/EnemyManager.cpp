@@ -1,4 +1,5 @@
 #include "EnemyManager.h"
+#include "Cecil.h"
 
 /**
  * A class to manage all of the skulls 
@@ -34,6 +35,19 @@ bool EnemyManager::update(bn::vector<Enemy, constants::MAX_ENEMIES>& enemies,
         enemy.update(player);
 
         if(enemy.bounding_box.intersects(player.bounding_box)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+//return true of false to indicate if a skull hit cecil
+bool EnemyManager::hit_cecil(bn::vector<Enemy, constants::MAX_ENEMIES>& enemies,
+                             const Cecil& cecil)
+{
+    for(int i = 0; i < enemies.size(); i++) {
+        if(enemies[i].bounding_box.intersects(cecil.bounding_box)) {
+            enemies.erase(enemies.begin() + i);
             return true;
         }
     }

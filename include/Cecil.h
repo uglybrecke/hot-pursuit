@@ -16,10 +16,13 @@ class Cecil {
         Cecil(int x, int y);
 
         void update();
-        bool detect_enemy();
+        
+        //caught a skull
+        void fetch(bool hit);
 
     private:
         bn::sprite_ptr sprite;
         int idle_timer = 0;
         bool second_pose = false;
+        bool running = false;
 };

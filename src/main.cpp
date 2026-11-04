@@ -50,6 +50,9 @@ int main() {
         //make player not walk into cecil
         block_player(player, cecil.bounding_box, p_x, p_y);
 
+        //check if the enemy hits cecil
+        cecil.fetch(enemyManager.hit_cecil(enemies, cecil));
+
         //reset game
         if(enemyManager.update(enemies, player)) {
             reset_game(player, scoreDisplay);
