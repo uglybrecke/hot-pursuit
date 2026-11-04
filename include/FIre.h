@@ -1,0 +1,25 @@
+#pragma once
+#include <bn_sprite_ptr.h>
+#include <bn_vector.h>
+
+/**
+ * Generate the Fire walls that will block the players path
+ * Skulls (squares can move throuh these without issue)
+ */
+
+ class Fire {
+    public:
+        
+        /*
+        */
+        Fire(int x, int y);
+
+        /**
+         * makes the fire flip back and forth
+         */
+        void update();
+
+        bool fireBox();
+
+        void collision();
+ };
