@@ -31,6 +31,6 @@ class ScoreDisplay {
 
         int score; // current score
         int high_score; // best score
-        bn::vector<bn::sprite_ptr, Constants::Score::MAX_SCORE_CHARS> score_sprites; // Sprites to display scores
+        bn::vector<bn::sprite_ptr, constants::score::MAX_SCORE_CHARS> score_sprites; // Sprites to display scores
         bn::sprite_text_generator text_generator; // Text generator for scores
 };

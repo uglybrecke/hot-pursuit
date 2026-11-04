@@ -1,8 +1,8 @@
 #pragma once
 
-namespace Constants {
+namespace constants {
 
-    namespace Score {
+    namespace score {
         // Number of characters required to show two of the longest numbers possible in an int (-2147483647)
         static constexpr int MAX_SCORE_CHARS = 22;
 
