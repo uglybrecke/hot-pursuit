@@ -1,6 +1,7 @@
 #pragma once
 #include <bn_sprite_ptr.h>
 #include <bn_vector.h>
+#include "common.h"
 
 /**
  * Generate the Fire walls that will block the players path
@@ -9,8 +10,10 @@
 
  class Fire {
     public:
-        
-        /*
+        bn::rect bounding_box;      
+
+        /**
+         * 
         */
         Fire(int x, int y);
 
@@ -25,7 +28,7 @@
 
     private:
         bn::sprite_ptr sprite;
-        
+
         //each fire has a flicker timer in it
         int flicker = 0;
  };

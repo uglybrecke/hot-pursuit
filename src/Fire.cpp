@@ -1,10 +1,12 @@
 #include "Fire.h"
 #include "bn_sprite_items_fire.h"
+#include "common.h"
 
+//construcor
 Fire::Fire(int x, int y) :
     sprite(bn::sprite_items::fire.create_sprite(x, y))
 {
-
+    bounding_box = create_bounding_box(sprite, sprite.dimensions());
 }
 
 //flip the sprite 
