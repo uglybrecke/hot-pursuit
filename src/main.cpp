@@ -1,9 +1,6 @@
 #include <bn_core.h>
 #include <bn_random.h>
 
-#include "bn_sprite_items_square.h"
-#include "common.h"
-
 #include "Enemy.h"
 #include "Player.h"
 #include "ScoreDisplay.h"
