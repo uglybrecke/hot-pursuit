@@ -77,7 +77,7 @@ int main() {
         }
 
         //if framecount is divisble by  1200 add a fire make a bunch of fire randomly
-        if ((frame_count % 1200) == 0 && frame_count >= 1200) {
+        if ((frame_count % 300) == 0 && frame_count >= 300) {
             fireManager.spawn(random.get_unbiased_int(constants::MIN_X + 16, constants::MAX_X - 16), random.get_unbiased_int(constants::MIN_Y + 16, constants::MAX_Y - 16));
             fireManager.spawn(random.get_unbiased_int(constants::MIN_X + 16, constants::MAX_X - 16), random.get_unbiased_int(constants::MIN_Y + 16, constants::MAX_Y - 16));
             fireManager.spawn(random.get_unbiased_int(constants::MIN_X + 16, constants::MAX_X - 16), random.get_unbiased_int(constants::MIN_Y + 16, constants::MAX_Y - 16));

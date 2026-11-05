@@ -26,6 +26,7 @@ void Cecil::update()
             sprite.set_position(x, y);
             sprite.set_item(bn::sprite_items::cecil);
             sprite.set_horizontal_flip(false);
+            sprite.put_above(); //.set_z_order(int) will allow a priority systme(high is front)
             sprite.set_visible(true);
 
             pose_timer = 0;
