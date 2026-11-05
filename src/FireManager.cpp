@@ -15,8 +15,7 @@ void FireManager::update(Player& player, Cecil& cecil, bn::fixed previous_x, bn:
            cecil.bounding_box.intersects(fires[i].bounding_box)) {
             fires.erase(fires.begin() + i);
         } else {
-            block_player(player, fires[i].bounding_box,
-                         previous_x, previous_y);
+            block_player(player, fires[i].bounding_box, previous_x, previous_y);
             i++;
         }
     }
