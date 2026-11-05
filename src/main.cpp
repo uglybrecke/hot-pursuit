@@ -48,7 +48,9 @@ int main() {
         block_player(player, fire.bounding_box, p_x, p_y);
 
         //make player not walk into cecil
-        block_player(player, cecil.bounding_box, p_x, p_y);
+        if(cecil.blocks_player()) {
+            block_player(player, cecil.bounding_box, p_x, p_y);
+        }
 
         //check if the enemy hits cecil
         cecil.fetch(enemyManager.hit_cecil(enemies, cecil));

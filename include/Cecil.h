@@ -17,8 +17,16 @@ class Cecil : public Entity {
         //caught a skull
         void fetch(bool hit);
 
+        bool blocks_player();
+
+        bool active = true;
+
     private:
         int idle_timer = 0;
         bool second_pose = false;
         bool running = false;
+        int run_direction = 1;
+        int respawn = 0;
+        int spawn_x;
+        int spawn_y;
 };
