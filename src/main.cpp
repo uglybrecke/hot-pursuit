@@ -9,6 +9,7 @@
 #include "common.h"
 #include "EnemyManager.h"
 #include "Game.h"
+#include "FireManager.h"
 
 //random
 static bn::random random;
@@ -25,8 +26,12 @@ int main() {
     // Create a Player
     Player player = Player();
 
-    //create Fire
-    Fire fire(0,0);
+    //create Fires
+    FireManager fireManager;
+    fireManager.spawn(-32, 0);
+    fireManager.spawn(0, 0);
+    fireManager.spawn(32, 0);
+    fireManager.spawn(64, 0);
 
     //create Cecil
     Cecil cecil(-64, 0);
@@ -41,11 +46,8 @@ int main() {
         bn::fixed p_y = player.sprite.y();        
 
         player.update();
-        fire.update();
         cecil.update();
-
-        //make player not walk into fire
-        block_player(player, fire.bounding_box, p_x, p_y);
+        fireManager.update(player, cecil, p_x, p_y);
 
         //make player not walk into cecil
         if(cecil.blocks_player()) {
@@ -53,7 +55,9 @@ int main() {
         }
 
         //check if the enemy hits cecil
-        cecil.fetch(enemyManager.hit_cecil(enemies, cecil));
+        if(cecil.blocks_player()) {
+            cecil.fetch(enemyManager.hit_cecil(enemies, cecil));
+        }
 
         //reset game
         if(enemyManager.update(enemies, player)) {

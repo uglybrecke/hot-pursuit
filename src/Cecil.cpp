@@ -19,7 +19,11 @@ void Cecil::update()
     {
         respawn++;
         if(respawn >= 600) {
-            sprite.set_position(spawn_x, spawn_y);
+            //random cecil spawn
+            int x = random.get_unbiased_int(constants::MIN_X + 16, constants::MAX_X - 16);
+            int y = random.get_unbiased_int(constants::MIN_Y + 16, constants::MAX_Y - 16);
+
+            sprite.set_position(x, y);
             sprite.set_item(bn::sprite_items::cecil);
             sprite.set_horizontal_flip(false);
             sprite.set_visible(true);
