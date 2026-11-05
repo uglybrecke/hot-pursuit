@@ -2,16 +2,14 @@
 
 #include <bn_rect.h>
 #include <bn_sprite_ptr.h>
-#include <bn_vector.h>
 
 /**
  * Generate the Fire walls that will block the players path
  * Skulls (squares can move throuh these without issue)
  */
 
- class Fire {
-    public:
-        bn::rect bounding_box;      
+ class Fire : public Entity {
+    public:   
 
         /**
          * Fire constructor
@@ -28,7 +26,6 @@
         void collision();
 
     private:
-        bn::sprite_ptr sprite;
 
         //each fire has a flicker timer in it
         int flicker = 0;
