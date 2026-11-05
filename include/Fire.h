@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Entity.h"
+
 #include <bn_rect.h>
 #include <bn_sprite_ptr.h>
 
