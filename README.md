@@ -1,5 +1,5 @@
 # Hot Pursuit
-Evade the floating skulls for as long as you can.  
+Evade the floating skulls and walls of fire for as long as you can.  
 Your companion Cecil may be able to help.
 
 ![Sample recording of game](./hot-pursuit.gif)
