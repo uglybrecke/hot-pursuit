@@ -22,7 +22,7 @@ class Cecil : public Entity {
         bool active = true;
 
     private:
-        int idle_timer = 0;
+        int pose_timer = 0;
         bool second_pose = false;
         bool running = false;
         int run_direction = 1;

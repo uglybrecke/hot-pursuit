@@ -10,7 +10,7 @@
 //constructor
 Cecil::Cecil(int x, int y) : Entity(bn::sprite_items::cecil, x, y, constants::player::BASE_SPEED)
 {
-
+    
 }
 
 void Cecil::update()
@@ -24,7 +24,7 @@ void Cecil::update()
             sprite.set_horizontal_flip(false);
             sprite.set_visible(true);
 
-            idle_timer = 0;
+            pose_timer = 0;
             second_pose = false;
             running = false;
             active = true;
@@ -37,9 +37,9 @@ void Cecil::update()
     if(running) {
         sprite.set_x(sprite.x() + run_direction * 2);
 
-        idle_timer++;
+        pose_timer++;
 
-        if(idle_timer >= 8) {
+        if(pose_timer >= 8) {
             second_pose = !second_pose;
 
             if(second_pose) {
@@ -48,7 +48,7 @@ void Cecil::update()
                 sprite.set_item(bn::sprite_items::cecil_bone_run1);
             }
 
-            idle_timer = 0;
+            pose_timer = 0;
         }
 
         bounding_box = create_bounding_box(sprite, sprite.dimensions());
@@ -66,9 +66,9 @@ void Cecil::update()
         return;
     }
 
-    idle_timer++;
+    pose_timer++;
 
-    if(idle_timer >= 32)
+    if(pose_timer >= 32)
     {
         //alternate back and forth
         second_pose = !second_pose;
@@ -82,7 +82,7 @@ void Cecil::update()
             sprite.set_item(bn::sprite_items::cecil);
         }
 
-        idle_timer = 0;
+        pose_timer = 0;
     }
 }
 
@@ -98,7 +98,7 @@ void Cecil::fetch(bool hit) {
         sprite.set_horizontal_flip(run_direction == 1);
 
         running = true;
-        idle_timer = 0;
+        pose_timer = 0;
         second_pose = false;
 
         sprite.set_item(bn::sprite_items::cecil_bone_run1);
