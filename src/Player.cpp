@@ -13,9 +13,11 @@ Player::Player() : Entity(bn::sprite_items::dot, constants::player::INITIAL_X, c
 void Player::update() {
     if(bn::keypad::right_held()) {
         sprite.set_x(sprite.x() + speed);
+        sprite.set_horizontal_flip(true);
     }
     if(bn::keypad::left_held()) {
         sprite.set_x(sprite.x() - speed);
+        sprite.set_horizontal_flip(false);
     }
     if(bn::keypad::up_held()) {
         sprite.set_y(sprite.y() - speed);
