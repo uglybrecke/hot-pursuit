@@ -6,8 +6,8 @@
 
 #include "Player.h"
 
-Player::Player() : sprite(bn::sprite_items::dot.create_sprite(constants::player::INITIAL_X, constants::player::INITIAL_Y)), size(constants::player::SIZE), speed(constants::player::BASE_SPEED) {
-    bounding_box = create_bounding_box(sprite, size);
+Player::Player() : Entity(bn::sprite_items::dot, constants::player::INITIAL_X, constants::player::INITIAL_Y, constants::player::SIZE, constants::player::BASE_SPEED) {
+    
 }
 
 void Player::update() {
@@ -24,8 +24,6 @@ void Player::update() {
         sprite.set_y(sprite.y() + speed);
     }
 
-    bounding_box = create_bounding_box(sprite, size);
-
     //make sure player doesn't go off the map
     if(sprite.x() >= constants::MAX_X) {
         sprite.set_x(constants::MAX_X);
@@ -39,4 +37,6 @@ void Player::update() {
     if(sprite.y() <= constants::MIN_Y) {
         sprite.set_y(constants::MIN_Y);
     }
+
+    Entity::update();
 }

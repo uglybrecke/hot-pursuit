@@ -1,12 +1,9 @@
 #include "bn_sprite_items_square.h"
-#include "common.h"
 
 #include "Enemy.h"
 
-Enemy::Enemy(int starting_x, int starting_y, bn::size starting_size, bn::fixed starting_speed) : sprite(bn::sprite_items::square.create_sprite(starting_x, starting_y)) {
-    size = starting_size;
-    speed = starting_speed;
-    bounding_box = create_bounding_box(sprite, size);
+Enemy::Enemy(int starting_x, int starting_y, bn::size starting_size, bn::fixed starting_speed) : Entity(bn::sprite_items::square, starting_x, starting_y, starting_size, starting_speed) {
+    
 }
 
 void Enemy::update(Player& player) {
@@ -26,5 +23,5 @@ void Enemy::update(Player& player) {
     if (player_y > current_y) {
         sprite.set_y(current_y + speed);
     }
-    bounding_box = create_bounding_box(sprite, size);
+    Entity::update();
 }

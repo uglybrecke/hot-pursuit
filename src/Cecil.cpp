@@ -1,14 +1,15 @@
 #include "Cecil.h"
+#include "constants.h"
+#include "common.h"
 #include "bn_sprite_items_cecil.h"
 #include "bn_sprite_items_cecil2.h"
 #include "bn_sprite_items_cecil_bone_run1.h"
 #include "bn_sprite_items_cecil_bone_run2.h"
 
-//construcor
-Cecil::Cecil(int x, int y) :
-    sprite(bn::sprite_items::cecil.create_sprite(x, y))
+//constructor
+Cecil::Cecil(int x, int y) : Entity(bn::sprite_items::cecil, x, y, constants::player::BASE_SPEED)
 {
-    bounding_box = create_bounding_box(sprite, sprite.dimensions());
+
 }
 
 void Cecil::update()
@@ -40,8 +41,6 @@ void Cecil::fetch(bool hit) {
     if(hit && !running) {
         running = true;
         sprite.set_item(bn::sprite_items::cecil_bone_run1);
-
-        bounding_box = create_bounding_box(sprite, sprite.dimensions());
         //activate run sequence
         //check distance from edges of map
         //swap sprite to cecil_bone_run1

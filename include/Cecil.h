@@ -1,7 +1,6 @@
 #pragma once
 
-#include <bn_sprite_ptr.h>
-#include "common.h"
+#include "Entity.h"
 
 /**
  * Generate the Cecil Dog block that will block the players path
@@ -9,10 +8,8 @@
  * good dog! :)
  */
 
-class Cecil {
+class Cecil : public Entity {
     public:
-        bn::rect bounding_box;
-
         Cecil(int x, int y);
 
         void update();
@@ -21,7 +18,6 @@ class Cecil {
         void fetch(bool hit);
 
     private:
-        bn::sprite_ptr sprite;
         int idle_timer = 0;
         bool second_pose = false;
         bool running = false;
