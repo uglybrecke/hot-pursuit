@@ -61,7 +61,9 @@ int main() {
         }
 
         // Spawn an enemy every 10 seconds if there's room
-        enemyManager.spawn(enemies, frame_count);
+        if ((frame_count % 600) == 0) {
+            enemyManager.spawn(enemies, player);
+        }
 
         // Reset the frame counter after 4 minutes
         if (frame_count == 14400) {
