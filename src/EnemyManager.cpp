@@ -6,25 +6,37 @@
  */
 
 //the spawning function
-void EnemyManager::spawn(bn::vector<Enemy, constants::MAX_ENEMIES>& enemies,
-                         bn::fixed frame_count)
+void EnemyManager::spawn(bn::vector<Enemy, constants::MAX_ENEMIES>& enemies, Player& player)
 {
-        // Spawn an enemy every 10 seconds if there's room
-        if ((frame_count % 600) == 0) {
-            if (enemies.size() < constants::MAX_ENEMIES) {
-                Enemy new_enemy = Enemy(
-                    random.get_unbiased_int(
-                        constants::MIN_X,
-                        constants::MAX_X),
-                    random.get_unbiased_int(
-                        constants::MIN_Y, 
-                        constants::MAX_Y), 
-                    constants::enemy::SIZE, 
-                    constants::enemy::BASE_SPEED);
+    if (enemies.size() < constants::MAX_ENEMIES) {
+        int player_x = player.sprite.x().round_integer();
+        int player_y = player.sprite.y().round_integer();
+        int new_x = 0;
+        int new_y = 0;
+        // Find a suitable spawn location
+        for (int i = 0; i < 10; i++) {
+            new_x = random.get_unbiased_int(constants::MIN_X, constants::MAX_X);
+            new_y = random.get_unbiased_int(constants::MIN_Y, constants::MAX_Y);
+            int dx = bn::abs(player_x - new_x);
+            int dy = bn::abs(player_y - new_y);
 
-                enemies.push_back(new_enemy);
+            if (dx > constants::enemy::SAFE_SPAWN_DISTANCE || dy > constants::enemy::SAFE_SPAWN_DISTANCE) {
+                break;
+            } else {
+                if (i == 9) {
+                    return; // No safe spawn location found
+                }
             }
         }
+
+        // Once one is found, spawn an enemy
+        Enemy new_enemy = Enemy(
+            new_x, new_y, 
+            constants::enemy::SIZE, 
+            constants::enemy::BASE_SPEED);
+
+        enemies.push_back(new_enemy);
+    }
 }
 
 //return true or false to main to reset the game

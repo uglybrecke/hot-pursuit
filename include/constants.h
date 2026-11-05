@@ -38,6 +38,7 @@ namespace constants {
         static constexpr int INITIAL_Y = 40;
         static constexpr bn::fixed BASE_SPEED = 0.7;
         static constexpr bn::size SIZE = {16, 16};
+        static constexpr int SAFE_SPAWN_DISTANCE = 15;
     }
 
 }
